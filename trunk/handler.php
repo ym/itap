@@ -53,14 +53,15 @@
 			curl_close($ch);
 			return $response;
 		}
-		
+		protected function WoahThere($response) {
+			if(strpos($response,'Woah there!')) {
+				exit('This page is no longer valid. It looks like someone already used the token information you provided. Please return to the site that sent you to this page and try again, it was probably an honest mistake.');
+			}
+		}
 		public function auth_show() {
 			global $query;
 			$response = $this->_GET(OAUTH_URL.'authorize'.$query);
-			// exceptions
-				if(strpos($response,'Woah there!')) {
-					exit('This page is no longer valid. It looks like someone already used the token information you provided. Please return to the site that sent you to this page and try again … it was probably an honest mistake.');
-				}
+			$this->WoahThere($response);
 			// get application data
 			preg_match('/ class\=\"app-icon\" src\=\"(.*?)\" \/\>\<\/a\>/i',$response,$ms);
 				list(,$app_icon) = $ms;
@@ -78,14 +79,11 @@
 			unset($ot_pos,$at_pos,$ata_ct,$ota_ct,$ms);
 			require 'login.php';
 			}
-			
+		
 		public function auth_show_l() {
 			global $query;
 			$response = $this->_GET(OAUTH_URL.'authenticate'.$query);
-			// exceptions
-				if(strpos($response,'Woah there!')) {
-					exit('This page is no longer valid. It looks like someone already used the token information you provided. Please return to the site that sent you to this page and try again … it was probably an honest mistake.');
-				}
+			$this->WoahThere($response);
 			// get application data
 			preg_match('/ class\=\"app-icon\" src\=\"(.*?)\" \/\>\<\/a\>/i',$response,$ms);
 				list(,$app_icon) = $ms;
@@ -114,6 +112,7 @@
 				'session[password]'			=> $_POST['password'],
 			));
 			preg_match('/please \<a href\=\"(.*?)\"\>click here\<\/a\>/i',$response,$ms);
+			$this->WoahThere($response);
 			if(strpos($response,'Invalid user name or password')) {
 				$this->invaid_password();
 			} elseif(!$ms) {
@@ -123,7 +122,7 @@
 			header("Location: {$ms[1]}");
 		}
 			
-		public function authl_post_l() {
+		public function auth_post_l() {
 			global $_POST;
 			$response = $this->_POST(OAUTH_URL.'authenticate?oauth_token='.$_POST['ot'],array(
 				'authenticity_token'			=> $_POST['at'],
@@ -133,6 +132,7 @@
 				'session[password]'			=> $_POST['password'],
 			));
 			preg_match('/please \<a href\=\"(.*?)\"\>click here\<\/a\>/i',$response,$ms);
+			$this->WoahThere($response);
 			if(strpos($response,'Invalid user name or password')) {
 				$this->invaid_password();
 			} elseif(!$ms) {
@@ -147,7 +147,7 @@
 			if($result=='"ok"') {
 				echo 'Connected to Twitter API successfully.';
 			} else {
-				var_dump($result);
+				echo 'Something is wrong.';
 			}
 		}
 			

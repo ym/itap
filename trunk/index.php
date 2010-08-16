@@ -12,11 +12,11 @@
 	 * The login page is modified from NetPutter
 	 */
 	
-	error_reporting(E_ALL);
+	error_reporting(0);
 	
 	
 	define('OAUTH_URL','https://twitter.com/oauth/');
-	define('API_URL','https://twitter.com/api/');
+	define('API_URL','https://api.twitter.com/');
 	define('ITAP_VERSION','r8 - 20100816 - Valentine\'s Day');
 	
 	$allowed_method = array(
@@ -25,9 +25,10 @@
 	
 	$method = substr($_SERVER['REQUEST_URI'],strripos($_SERVER['REQUEST_URI'],'/')+1);
 	
-	if(strpos($method,'?')!=-1) {
+	if(strpos($method,'?')!=false) {
 		$method = substr($method,0,strpos($method,'?'));
 	}
+	
 	
 	$query = '?'.(isset($_SERVER['REDIRECT_QUERY_STRING']) ? $_SERVER['REDIRECT_QUERY_STRING'] : $_SERVER['QUERY_STRING']);
 	
