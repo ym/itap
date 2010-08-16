@@ -5,9 +5,9 @@
 	 * send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 	 *
 	 * @name: iTAP
-	 * @author: Kristy Swan (@LonelySwan) (MxSiyuan@Gmail.com)
-	 * @website: http://blog.vii.im
-	 * @version: r7 2010-06-25 12:02
+	 * @author: Aveline Lan (Twitter @LonelySwan) (12@34.la / i@vii.im)
+	 * @website: http://vii.im
+	 * @version: r8 2010-06-25 12:02
 	 * 
 	 * The login page is modified from NetPutter
 	 */
@@ -30,7 +30,7 @@
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_HEADER, false); 
+			curl_setopt($ch, CURLOPT_HEADER, false);
 			curl_setopt($ch, CURLOPT_COOKIEFILE, $this->_cookie());
 			curl_setopt($ch, CURLOPT_COOKIEJAR, $this->_cookie());
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -140,6 +140,15 @@
 				exit;
 			}
 			header("Location: {$ms[1]}");
+		}
+		
+		public function test_connection() {
+			$result = $this->_GET(API_URL.'1/help/test.json');
+			if($result=='"ok"') {
+				echo 'Connected to Twitter API successfully.';
+			} else {
+				var_dump($result);
+			}
 		}
 			
 		public function __destruct() {
