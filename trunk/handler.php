@@ -111,7 +111,7 @@
 				'session[username_or_email]'	=> $_POST['username'],
 				'session[password]'			=> $_POST['password'],
 			));
-			preg_match('/please \<a href\=\"(.*?)\"\>click here\<\/a\>/i',$response,$ms);
+			preg_match('/  http-equiv\=\"refresh\" content\=\"0\;url\=(.*?)\"\>/i',$response,$ms);
 			$this->WoahThere($response);
 			if(strpos($response,'Invalid user name or password')) {
 				$this->invaid_password();
@@ -131,7 +131,7 @@
 				'session[username_or_email]'	=> $_POST['username'],
 				'session[password]'			=> $_POST['password'],
 			));
-			preg_match('/please \<a href\=\"(.*?)\"\>click here\<\/a\>/i',$response,$ms);
+			preg_match('/  http-equiv\=\"refresh\" content\=\"0\;url\=(.*?)\"\>/i',$response,$ms);
 			$this->WoahThere($response);
 			if(strpos($response,'Invalid user name or password')) {
 				$this->invaid_password();
