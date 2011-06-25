@@ -5,11 +5,11 @@
 	 * send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 	 *
 	 * @name: iTAP
-	 * @author: Aveline Lan (Twitter @LonelySwan) (12@34.la / i@vii.im)
+	 * @author: Aveline Swan (Twitter @AvelineSwan) (i@vii.im)
 	 * @website: http://vii.im
-	 * @version: r8 2010-06-25 12:02
+	 * @version: r9 2011-06-25 22:23
 	 * 
-	 * The login page is modified from NetPutter
+	 * The login page is modified from Dabr
 	 */
 		 
 	class OAPHandle {
@@ -67,7 +67,7 @@
 				list(,$app_icon) = $ms;
 			preg_match('/<h4 style\=\"font\-weight\:normal\;\"\>The application \<strong\>(.*?)\<\/strong\> by \<strong\>(.*?)<\/strong\> wou/i',$response,$ms);
 				list(,$app_name,$app_provider) = $ms;
-			// ..被正则烦死了,用strpos吧
+			// get auth key
 				$at_pos = strpos($response,'"authenticity_token" type="hidden" value="') + 42;
 				$ata_ct = substr($response,$at_pos);
 				$at_value = substr($ata_ct,0,strpos($ata_ct,'"'));
@@ -89,7 +89,7 @@
 				list(,$app_icon) = $ms;
 			preg_match('/<h4 style\=\"font\-weight\:normal\;\"\>The application \<strong\>(.*?)\<\/strong\> by \<strong\>(.*?)<\/strong\> wou/i',$response,$ms);
 				list(,$app_name,$app_provider) = $ms;
-			// ..被正则烦死了,用strpos吧
+			// get auth key
 				$at_pos = strpos($response,'"authenticity_token" type="hidden" value="') + 42;
 				$ata_ct = substr($response,$at_pos);
 				$at_value = substr($ata_ct,0,strpos($ata_ct,'"'));
@@ -111,7 +111,7 @@
 				'session[username_or_email]'	=> $_POST['username'],
 				'session[password]'			=> $_POST['password'],
 			));
-			preg_match('/  http-equiv\=\"refresh\" content\=\"0\;url\=(.*?)\"\>/i',$response,$ms);
+			preg_match('/  http-equiv\=\"refresh content\=\"0\;url\=(.*?)\"\>/i',$response,$ms);
 			$this->WoahThere($response);
 			if(strpos($response,'Invalid user name or password')) {
 				$this->invaid_password();
@@ -131,7 +131,7 @@
 				'session[username_or_email]'	=> $_POST['username'],
 				'session[password]'			=> $_POST['password'],
 			));
-			preg_match('/  http-equiv\=\"refresh\" content\=\"0\;url\=(.*?)\"\>/i',$response,$ms);
+			preg_match('/  http-equiv\=\"refresh content\=\"0\;url\=(.*?)\"\>/i',$response,$ms);
 			$this->WoahThere($response);
 			if(strpos($response,'Invalid user name or password')) {
 				$this->invaid_password();
