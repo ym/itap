@@ -5,11 +5,11 @@
 	 * send a letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 	 *
 	 * @name: iTAP
-	 * @author: Aveline Lan (Twitter @LonelySwan) (12@34.la / i@vii.im)
+	 * @author: Aveline Swan (Twitter @AvelineSwan) (i@vii.im)
 	 * @website: http://vii.im
 	 * @version: r8 2010-06-25 12:02
 	 * 
-	 * The login page is modified from NetPutter
+	 * The login page is modified from Dabr
 	 */
 	
 	error_reporting(0);
